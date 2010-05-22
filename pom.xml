@@ -8,7 +8,6 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>com.thalesgroup.hudson.plugins.genericpublisher</groupId>
     <artifactId>tusarnotifier</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>hpi</packaging>
