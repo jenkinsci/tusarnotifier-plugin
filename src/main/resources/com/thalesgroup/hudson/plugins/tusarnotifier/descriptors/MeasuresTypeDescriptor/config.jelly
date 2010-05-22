@@ -30,14 +30,14 @@
 			<j:choose>
 				<j:when test="${instance==null}">
 					<td width="50%" style="${td}">
-						<f:hidden field="inputTypeKey" value="${descriptor.type.inputTypeKey}"/>
+                        <input name="_.inputTypeKey" value="${descriptor.type.inputTypeKey}" type="hidden"/>
 						<label>Pattern</label>
 						<f:textbox field="pattern" />
 					</td>							  
 				</j:when>
 				<j:otherwise>
 					<td width="50%" style="${td}">							
-						<f:hidden field="inputTypeKey"/>
+                          <input name="_.inputTypeKey" value="${instance.inputTypeKey}" type="hidden"/>
 						<label>Pattern</label>
 						<f:textbox field="pattern"/>
 					</td>					

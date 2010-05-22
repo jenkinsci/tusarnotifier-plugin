@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Copyright (c) 2010 Thales Corporate Services SAS                             *
- * Author : Grégory Boissinot, Guillaume Tanier                                 *
+ * Author : Gregory Boissinot, Guillaume Tanier                                 *
  *                                                                              *
  * Permission is hereby granted, free of charge, to any person obtaining a copy *
  * of this software and associated documentation files (the "Software"), to deal*
@@ -44,7 +44,7 @@ public class TestsTypeDescriptor<T extends TestsType> extends Descriptor<TestsTy
             //TODO A CORRIGER
             return "erreur";
         }
-        return inputType.getName();
+        return inputType.getLabel();
     }
 
     public TestsType getType() {

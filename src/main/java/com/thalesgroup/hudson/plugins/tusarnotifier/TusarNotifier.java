@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Copyright (c) 2010 Thales Corporate Services SAS                             *
- * Author : Grégory Boissinot, Guillaume Tanier                                 *
+ * Author : Gregory Boissinot, Guillaume Tanier                                 *
  *                                                                              *
  * Permission is hereby granted, free of charge, to any person obtaining a copy *
  * of this software and associated documentation files (the "Software"), to deal*
@@ -24,6 +24,8 @@
 package com.thalesgroup.hudson.plugins.tusarnotifier;
 
 import com.thalesgroup.hudson.library.tusarconversion.ConversionType;
+import com.thalesgroup.hudson.library.tusarconversion.ConversionUtil;
+import com.thalesgroup.hudson.library.tusarconversion.exception.ConversionException;
 import com.thalesgroup.hudson.library.tusarconversion.model.InputType;
 import com.thalesgroup.hudson.plugins.tusarnotifier.descriptors.CoverageTypeDescriptor;
 import com.thalesgroup.hudson.plugins.tusarnotifier.descriptors.MeasuresTypeDescriptor;
@@ -35,8 +37,9 @@ import com.thalesgroup.hudson.plugins.tusarnotifier.types.TestsType;
 import com.thalesgroup.hudson.plugins.tusarnotifier.types.ViolationsType;
 import hudson.DescriptorExtensionList;
 import hudson.Extension;
-import hudson.model.Descriptor;
-import hudson.model.Hudson;
+import hudson.FilePath.FileCallable;
+import hudson.Launcher;
+import hudson.model.*;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.BuildStepMonitor;
 import hudson.tasks.Notifier;
@@ -44,10 +47,14 @@ import hudson.tasks.Publisher;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.StaplerRequest;
 
+import java.io.*;
 import java.lang.reflect.Constructor;
 import java.util.*;
+import java.util.logging.Logger;
 
 public class TusarNotifier extends Notifier {
+
+    private static final Logger LOG = Logger.getLogger(TusarNotifier.class.getName());
 
     private TestsType[] typesTests;
     private CoverageType[] typesCoverage;
@@ -82,15 +89,126 @@ public class TusarNotifier extends Notifier {
         return BuildStepMonitor.NONE;
     }
 
+
+    @Override
+    public boolean perform(final AbstractBuild<?, ?> build, Launcher launcher, final BuildListener listener)
+            throws InterruptedException, IOException {
+
+        final String delimiter = " ";
+        final String tusarLanguage = "-Dsonar.language=tusar";
+        final String testsArgs = "-Dsonar.surefire.reportsPath=";
+        final String coverageArgs = "-Dsonar.tusar.coverage.reportsPath=";
+        final String violationsArgs = "-Dsonar.tusar.violations.reportsPath=";
+        final String measuresArgs = "-Dsonar.tusar.measures.reportsPath=";
+        final StringBuffer sonarArgs = new StringBuffer();
+
+        boolean resultConversion = build.getWorkspace().act(new FileCallable<Boolean>() {
+
+            private void convertTusar(File workspace, String categoryName, String inputTypeKey, String pattern) throws IOException, InterruptedException, ConversionException {
+
+                assert workspace != null;
+                assert categoryName != null;
+                assert inputTypeKey != null;
+                assert pattern != null;
+
+
+                final String generatedFoderName = "generatedTUSARFiles";
+                InputType inputType = ConversionType.TESTS.getAll().get(inputTypeKey);
+                File outputFileParent = new File(workspace, generatedFoderName + "/" + categoryName);
+                outputFileParent.mkdirs();
+
+                File outputFile = new File(outputFileParent, "/result-junit-" + pattern.replace("/", "_"));
+                outputFile.createNewFile();
+                File inputFile = new File(workspace, pattern);
+                if (!inputFile.exists()) {
+                    throw new IOException("No input files with the pattern " + pattern + " have been found.");
+                }
+                conversion(inputType, new File(workspace, pattern), outputFile);
+            }
+
+            public Boolean invoke(File workspace, hudson.remoting.VirtualChannel channel) throws IOException, InterruptedException {
+
+                try {
+
+                    // Apply conversion for all tests tools
+                    for (TestsType testsType : typesTests) {
+                        convertTusar(workspace, "TESTS", testsType.getInputTypeKey(), testsType.getPattern());
+                    }
+                    if (typesTests.length != 0) {
+                        sonarArgs.append(delimiter);
+                        sonarArgs.append(testsArgs);
+                    }
+
+                    // Apply conversion for all coverage tools
+                    for (CoverageType coverageType : typesCoverage) {
+                        convertTusar(workspace, "COVERAGE", coverageType.getInputTypeKey(), coverageType.getPattern());
+                    }
+                    if (typesCoverage.length != 0) {
+                        sonarArgs.append(delimiter);
+                        sonarArgs.append(coverageArgs);
+                    }
+
+                    // Apply conversion for all measures tools
+                    for (MeasuresType measuresType : typesMeasures) {
+                        convertTusar(workspace, "MEASURES", measuresType.getInputTypeKey(), measuresType.getPattern());
+                    }
+                    if (typesMeasures.length != 0) {
+                        sonarArgs.append(delimiter);
+                        sonarArgs.append(measuresArgs);
+                    }
+
+                    //-- Apply conversion for all violations tools
+                    for (ViolationsType violationsType : typesViolations) {
+                        convertTusar(workspace, "VIOLATIONS", violationsType.getInputTypeKey(), violationsType.getPattern());
+                    }
+                    if (typesViolations.length != 0) {
+                        sonarArgs.append(delimiter);
+                        sonarArgs.append(violationsArgs);
+                    }
+                }
+                catch (Exception e) {
+                    listener.getLogger().print("Tusar notifier error : " + e);
+                    return false;
+                }
+
+                return true;
+            }
+
+        }
+
+        );
+
+        if (!resultConversion) {
+            build.setResult(Result.FAILURE);
+            return false;
+        } else {
+            //Export TUSAR Arguments as Hudosn build paramaters for Sonar Light mode
+            sonarArgs.insert(0, tusarLanguage);
+            build.getBuildVariables().put("SONAR_TUSAR_ARGS", sonarArgs.toString());
+            return true;
+        }
+
+    }
+
+
+    private void conversion(InputType type, File inputFile, File outputFile) throws IOException, ConversionException {
+
+        InputStream inputStream = new FileInputStream(inputFile);
+        OutputStream outputStream = new FileOutputStream(outputFile);
+
+        ConversionUtil.convert(type, inputStream, outputStream);
+    }
+
+
     @Extension(ordinal = 0)
-    public static final class GenericPublisherDescriptor extends BuildStepDescriptor<Publisher> {
+    public static final class TusarNotifierDescriptor extends BuildStepDescriptor<Publisher> {
 
         private static DescriptorExtensionList<TestsType, TestsTypeDescriptor<?>> testsDescriptorExtensionList;
         private static DescriptorExtensionList<CoverageType, CoverageTypeDescriptor<?>> coverageDescriptorExtensionList;
         private static DescriptorExtensionList<ViolationsType, ViolationsTypeDescriptor<?>> violationsDescriptorExtensionList;
         private static DescriptorExtensionList<MeasuresType, MeasuresTypeDescriptor<?>> measuresDescriptorExtensionList;
 
-        public GenericPublisherDescriptor() {
+        public TusarNotifierDescriptor() {
             super(TusarNotifier.class);
             load();
         }
