@@ -54,8 +54,6 @@ import java.util.*;
 
 public class TusarNotifier extends Notifier {
 
-    public final String SONAR_TUSAR_ARGS = "SONAR_TUSAR_ARGS";
-
     private TestsType[] typesTests;
     private CoverageType[] typesCoverage;
     private ViolationsType[] typesViolations;
@@ -95,15 +93,8 @@ public class TusarNotifier extends Notifier {
             throws InterruptedException, IOException {
 
         TusarNotifierLogger.log(listener, "Starting Processing all tusar analysis report.");
-
-        final String delimiter = " ";
-        final String tusarLanguage = "-Dsonar.language=tusar";
-        final String testsArgs = "-Dsonar.surefire.reportsPath=";
-        final String coverageArgs = "-Dsonar.tusar.coverage.reportsPath=";
-        final String violationsArgs = "-Dsonar.tusar.violations.reportsPath=";
-        final String measuresArgs = "-Dsonar.tusar.measures.reportsPath=";
-        final StringBuffer sonarArgs = new StringBuffer();
-
+        final ArrayList<ParameterValue> parameters = new ArrayList<ParameterValue>();
+    	
         boolean resultConversion = build.getWorkspace().act(new FileCallable<Boolean>() {
 
             private void convertTusar(File workspace, File generatedDirectory, String inputTypeKey, String pattern) throws IOException, InterruptedException, ConversionException {
@@ -112,17 +103,19 @@ public class TusarNotifier extends Notifier {
                 assert inputTypeKey != null;
                 assert pattern != null;
 
-                InputType inputType = ConversionType.TESTS.getAll().get(inputTypeKey);
-
-                File outputFile = new File(generatedDirectory, "/result-junit-" + pattern.replace("/", "_"));
+                InputType inputType = ConversionType.getInputType(inputTypeKey);
+                
+                File outputFile = new File(generatedDirectory, "/result-junit-" + new File(pattern).getName());
                 outputFile.createNewFile();
+                
                 File inputFile = new File(workspace, pattern);
                 if (!inputFile.exists()) {
                     throw new IOException("No input files with the pattern " + pattern + " have been found.");
                 }
+                
                 conversion(inputType, new File(workspace, pattern), outputFile);
             }
-
+            
             public Boolean invoke(File workspace, hudson.remoting.VirtualChannel channel) throws IOException, InterruptedException {
 
                 final String generatedFolder = "generatedTUSARFiles";
@@ -130,9 +123,10 @@ public class TusarNotifier extends Notifier {
                 final String generatedCoverage = generatedFolder + "/COVERAGE";
                 final String generatedMeasures = generatedFolder + "/MEASURES";
                 final String generatedViolations = generatedFolder + "/VIOLATIONS";
-                try {
-
-
+                
+                try {                	
+                    parameters.add(new StringParameterValue("sonar.language", "tusar"));
+                	
                     // Apply conversion for all tests tools
                     if (typesTests.length != 0) {
 
@@ -142,10 +136,7 @@ public class TusarNotifier extends Notifier {
                         for (TestsType testsType : typesTests) {
                             convertTusar(workspace, outputTestsFileParent, testsType.getInputTypeKey(), testsType.getPattern());
                         }
-                        sonarArgs.append(delimiter);
-                        sonarArgs.append(testsArgs);
-                        sonarArgs.append(generatedTests);
-
+                        parameters.add(new StringParameterValue("sonar.tusar.tests.reportsPath", generatedTests));
                     }
 
                     // Apply conversion for all coverage tools
@@ -156,26 +147,8 @@ public class TusarNotifier extends Notifier {
 
                         for (CoverageType coverageType : typesCoverage) {
                             convertTusar(workspace, outputCoverageFileParent, coverageType.getInputTypeKey(), coverageType.getPattern());
-                        }
-                        sonarArgs.append(delimiter);
-                        sonarArgs.append(coverageArgs);
-                        sonarArgs.append(generatedCoverage);
-
-                    }
-
-                    // Apply conversion for all measures tools
-                    if (typesMeasures.length != 0) {
-
-                        File outputMeasuresFileParent = new File(workspace, generatedMeasures);
-                        outputMeasuresFileParent.mkdirs();
-
-                        for (MeasuresType measuresType : typesMeasures) {
-                            convertTusar(workspace, outputMeasuresFileParent, measuresType.getInputTypeKey(), measuresType.getPattern());
-                        }
-                        sonarArgs.append(delimiter);
-                        sonarArgs.append(measuresArgs);
-                        sonarArgs.append(generatedMeasures);
-
+                        }                        
+                        parameters.add(new StringParameterValue("sonar.tusar.coverage.reportsPath", generatedCoverage));
                     }
 
                     //-- Apply conversion for all violations tools
@@ -186,14 +159,23 @@ public class TusarNotifier extends Notifier {
 
                         for (ViolationsType violationsType : typesViolations) {
                             convertTusar(workspace, outputViolationsFileParent, violationsType.getInputTypeKey(), violationsType.getPattern());
-                        }
-                        sonarArgs.append(delimiter);
-                        sonarArgs.append(violationsArgs);
-                        sonarArgs.append(generatedViolations);
+                        }                        
+                        parameters.add(new StringParameterValue("sonar.tusar.violations.reportsPath", generatedViolations));
 
                     }
+                    
+                    // Apply conversion for all measures tools
+                    if (typesMeasures.length != 0) {
 
-                    sonarArgs.delete(0, delimiter.length());
+                        File outputMeasuresFileParent = new File(workspace, generatedMeasures);
+                        outputMeasuresFileParent.mkdirs();
+
+                        for (MeasuresType measuresType : typesMeasures) {
+                            convertTusar(workspace, outputMeasuresFileParent, measuresType.getInputTypeKey(), measuresType.getPattern());
+                        }                        
+                        parameters.add(new StringParameterValue("sonar.tusar.measures.reportsPath", generatedMeasures));
+                    }
+                   
                 }
                 catch (Exception e) {
                     listener.getLogger().print("Tusar notifier error : " + e);
@@ -202,9 +184,7 @@ public class TusarNotifier extends Notifier {
 
                 return true;
             }
-
         }
-
         );
 
 
@@ -215,21 +195,12 @@ public class TusarNotifier extends Notifier {
             return false;
 
         } else {
-            //Export TUSAR Arguments as Hudosn build paramaters for Sonar Light mode
-            sonarArgs.insert(0, delimiter);
-            sonarArgs.insert(0, tusarLanguage);
-
-            //SONAR_TUSAR_ARGS will be retrieve by build.getBuildVariables().get(SONAR_TUSAR_ARGS)
-            ArrayList<ParameterValue> parameters = new ArrayList<ParameterValue>();
-            parameters.add(new StringParameterValue(SONAR_TUSAR_ARGS, sonarArgs.toString()));
-            build.addAction(new ParametersAction(parameters));
-
-            TusarNotifierLogger.log(listener, "Put Sonar Tusar args: " + sonarArgs);
+            //Export TUSAR Arguments as Hudson build parameters for Sonar Light mode
+            TusarNotifierLogger.log(listener, "Put Sonar Tusar args into build variables.");
+        	build.addAction(new ParametersAction(parameters));
             TusarNotifierLogger.log(listener, "End Processing all tusar analysis report.");
             return true;
         }
-
-
     }
 
 
