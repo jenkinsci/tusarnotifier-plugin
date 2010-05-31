@@ -24,21 +24,21 @@
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
   <f:block>
   
-  <f:entry title="Tests" help="toto">    
-  	<f:hetero-list name="tests" descriptors="${descriptor.allTests}" items="${instance.typesTests}" />
-  </f:entry>
-  
-  <f:entry title="Coverage">
-  	<f:hetero-list name="coverage" descriptors="${descriptor.allCoverage}" items="${instance.typesCoverage}" />
-  </f:entry>
-  
-  <f:entry title="Violations">
-  	<f:hetero-list name="violations" descriptors="${descriptor.allViolations}" items="${instance.typesViolations}" />
-  </f:entry>
-  
-  <f:entry title="Measures">
-  	<f:hetero-list name="measures" descriptors="${descriptor.allMeasures}" items="${instance.typesMeasures}" />
-  </f:entry>
-  
+      <f:entry title="Tests">
+        <f:hetero-list name="tests" descriptors="${descriptor.allTests}" items="${instance.typesTests}" />
+      </f:entry>
+
+      <f:entry title="Coverage">
+        <f:hetero-list name="coverage" descriptors="${descriptor.allCoverage}" items="${instance.typesCoverage}" />
+      </f:entry>
+
+      <f:entry title="Violations">
+        <f:hetero-list name="violations" descriptors="${descriptor.allViolations}" items="${instance.typesViolations}" />
+      </f:entry>
+
+      <f:entry title="Measures">
+        <f:hetero-list name="measures" descriptors="${descriptor.allMeasures}" items="${instance.typesMeasures}" />
+      </f:entry>
+
   </f:block>
 </j:jelly>
