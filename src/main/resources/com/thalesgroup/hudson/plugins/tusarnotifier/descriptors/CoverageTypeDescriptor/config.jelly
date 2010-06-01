@@ -1,7 +1,7 @@
 <!--
 /*******************************************************************************
 * Copyright (c) 2009 Thales Corporate Services SAS                             *
-* Author : Gregory Boissinot, Guillaume Tanier                                                   *
+* Author : Gregory Boissinot, Guillaume Tanier                                 *
 *                                                                              *
 * Permission is hereby granted, free of charge, to any person obtaining a copy *
 * of this software and associated documentation files (the "Software"), to deal*
@@ -23,7 +23,7 @@
 -->
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
 
-	<f:entry field="pattern" title="${descriptor.displayName}" help="/plugin/tusarnotifier/help-pattern.html">
+	<f:entry field="pattern" title="${descriptor.displayName}">
 		<table width="100%"  border='0'  cellspacing='0' padding="0">
 			<tr>
 			
