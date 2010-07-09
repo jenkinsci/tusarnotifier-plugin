@@ -15,9 +15,8 @@
 
     <properties>
         <dtkit.frmk.version>0.1</dtkit.frmk.version>
-        <dtkit.default.version>0.1</dtkit.default.version>
+        <dtkit.default.tusar.version>0.2</dtkit.default.tusar.version>
     </properties>
-
 
     <dependencies>
 
@@ -34,21 +33,21 @@
         </dependency>
 
         <dependency>
-            <groupId>org.jvnet.hudson.plugins</groupId>
+	    <groupId>org.jvnet.hudson.dtkit</groupId>
             <artifactId>dtkit-metrics-api</artifactId>
             <version>${dtkit.frmk.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.jvnet.hudson.plugins</groupId>
+	    <groupId>org.jvnet.hudson.dtkit</groupId>
             <artifactId>dtkit-metrics-hudson-api</artifactId>
             <version>${dtkit.frmk.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.jvnet.hudson.plugins</groupId>
+	    <groupId>org.jvnet.hudson.dtkit</groupId>
             <artifactId>dtkit-default-tusar</artifactId>
-            <version>${dtkit.default.version}</version>
+            <version>${dtkit.default.tusar.version}</version>
 	    <classifier>hudson</classifier>
         </dependency>
 
