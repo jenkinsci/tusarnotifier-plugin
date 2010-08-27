@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Copyright (c) 2010 Thales Corporate Services SAS                             *
- * Author : Gregory Boissinot, Guillaume Tanier                                 *
+ * Author : Gregory Boissinot                                                   *
  *                                                                              *
  * Permission is hereby granted, free of charge, to any person obtaining a copy *
  * of this software and associated documentation files (the "Software"), to deal*
@@ -21,54 +21,54 @@
  * THE SOFTWARE.                                                                *
  *******************************************************************************/
 
-package com.thalesgroup.hudson.plugins.tusarnotifier.util;
+package com.thalesgroup.hudson.plugins.tusarnotifier.transformer;
 
-import hudson.model.BuildListener;
-import hudson.model.TaskListener;
-import org.jvnet.localizer.ResourceBundleHolder;
+import com.thalesgroup.dtkit.metrics.hudson.api.type.MetricsType;
 
+import java.io.File;
 import java.io.Serializable;
 
-import com.google.inject.Inject;
 
+public class TusarToolInfo implements Serializable {
 
-public class TusarNotifierLogger implements Serializable {
+    private File cusXSLFile;
 
-    private BuildListener buildListener;
+    private final MetricsType metricsType;
 
-    @Inject
-    @SuppressWarnings("unused")
-    void set(BuildListener buildListener) {
-        this.buildListener = buildListener;
+    private final File outputDir;
+
+    private final String expandedPattern;
+
+    private final long buildTime;
+
+    public TusarToolInfo(MetricsType metricsType, File outputDir, String expandedPattern, long buildTime) {
+        this.metricsType = metricsType;
+        this.outputDir = outputDir;
+        this.expandedPattern = expandedPattern;
+        this.buildTime = buildTime;
     }
 
-    /**
-     * Log an info output to the given logger
-     *
-     * @param message The message to be outputted
-     */
-    public void info(String message) {
-        buildListener.getLogger().println("[tusarNotifier] [INFO] - " + message);
+    public void setCusXSLFile(File cusXSLFile) {
+        this.cusXSLFile = cusXSLFile;
     }
 
-
-    /**
-     * Log an error output to the given logger
-     *
-     * @param message The message to be outputted
-     */
-    public void error(String message) {
-        buildListener.getLogger().println("[tusarNotifier] [ERROR] - " + message);
+    public File getCusXSLFile() {
+        return cusXSLFile;
     }
 
-    /**
-     * Log a warning output to the given logger
-     *
-     * @param message The message to be outputted
-     */
-    public void warning(String message) {
-        buildListener.getLogger().println("[tusarNotifier] [WARNING] - " + message);
+    public MetricsType getMetricsType() {
+        return metricsType;
     }
 
+    public File getOutputDir() {
+        return outputDir;
+    }
 
+    public String getExpandedPattern() {
+        return expandedPattern;
+    }
+
+    public long getBuildTime() {
+        return buildTime;
+    }
 }
