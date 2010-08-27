@@ -88,12 +88,13 @@ public class TusarNotifierConversionService implements Serializable {
 
         final String TUSAR_FILE_POSTFIX = ".xml";
         final String TUSAR_FILE_PREFIX = "TUSAR-";
-        File parent = new File(outputDirectory, inputMetric.getToolName());
-        parent.mkdirs();
-        if (!parent.exists()) {
-            throw new TusarNotifierException("Can't create " + parent);
-        }
-        File junitTargetFile = new File(parent, TUSAR_FILE_PREFIX + inputFile.hashCode() + TUSAR_FILE_POSTFIX);
+//        File parent = new File(outputDirectory, inputMetric.getToolName());
+//        parent.mkdirs();
+//        if (!parent.exists()) {
+//            throw new TusarNotifierException("Can't create " + parent);
+//        }
+//        File junitTargetFile = new File(parent, TUSAR_FILE_PREFIX + inputFile.hashCode() + TUSAR_FILE_POSTFIX);
+        File junitTargetFile = new File(outputDirectory, TUSAR_FILE_PREFIX + inputFile.hashCode() + TUSAR_FILE_POSTFIX);
         xUnitLog.info("Converting '" + inputFile + "' .");
         try {
 

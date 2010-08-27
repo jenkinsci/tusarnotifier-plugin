@@ -14,7 +14,7 @@
 
     <properties>
         <dtkit.frmk.version>0.5</dtkit.frmk.version>
-        <dtkit.default.tusar.version>0.6</dtkit.default.tusar.version>
+        <dtkit.default.tusar.version>0.7-SNAPSHOT</dtkit.default.tusar.version>
     </properties>
 
     <dependencies>
@@ -46,7 +46,7 @@
 
         <dependency>
 	    <groupId>org.jvnet.hudson.dtkit</groupId>
-            <artifactId>dtkit-default-tusar</artifactId>
+            <artifactId>dtkit-default-tusar-hudson</artifactId>
             <version>${dtkit.default.tusar.version}</version>
         </dependency>
 
