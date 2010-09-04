@@ -24,7 +24,7 @@
 package com.thalesgroup.hudson.plugins.tusarnotifier.service;
 
 import com.google.inject.Inject;
-import com.thalesgroup.dtkit.metrics.api.InputMetric;
+import com.thalesgroup.dtkit.metrics.model.InputMetric;
 import com.thalesgroup.dtkit.util.validator.ValidationError;
 import com.thalesgroup.dtkit.util.validator.ValidationException;
 import com.thalesgroup.hudson.plugins.tusarnotifier.exception.TusarNotifierException;
