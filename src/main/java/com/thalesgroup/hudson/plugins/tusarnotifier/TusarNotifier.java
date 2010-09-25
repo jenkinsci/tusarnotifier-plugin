@@ -54,11 +54,11 @@ import java.util.List;
 
 public class TusarNotifier extends Notifier {
 
-    final String generatedFolder = "generatedTUSARFiles";
-    final String generatedTests = generatedFolder + "/TESTS";
-    final String generatedCoverage = generatedFolder + "/COVERAGE";
-    final String generatedMeasures = generatedFolder + "/MEASURES";
-    final String generatedViolations = generatedFolder + "/VIOLATIONS";
+    private transient final String generatedFolder = "generatedTUSARFiles";
+    private transient final String generatedTests = generatedFolder + "/TESTS";
+    private transient final String generatedCoverage = generatedFolder + "/COVERAGE";
+    private transient final String generatedMeasures = generatedFolder + "/MEASURES";
+    private transient final String generatedViolations = generatedFolder + "/VIOLATIONS";
 
     private TestType[] tests;
     private CoverageType[] coverages;

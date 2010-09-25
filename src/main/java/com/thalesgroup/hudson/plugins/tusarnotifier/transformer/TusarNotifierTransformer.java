@@ -110,7 +110,7 @@ public class TusarNotifierTransformer implements FilePath.FileCallable<Boolean>,
 
         }
         catch (TusarNotifierException xe) {
-            throw new IOException2("There are some problems during the conversion into JUnit reports: " + xe.getMessage(), xe);
+            throw new IOException2("There are some problems during the conversion into standard output: " + xe.getMessage(), xe);
         }
 
         return true;

@@ -13,8 +13,9 @@
     <name>TUSAR Notifier</name>
 
     <properties>
-        <dtkit.frmk.version>0.6</dtkit.frmk.version>
-        <dtkit.default.tusar.version>0.7</dtkit.default.tusar.version>
+        <dtkit.frmk.version>0.8-SNAPSHOT</dtkit.frmk.version>
+        <dtkit.default.tusar.version>0.9-SNAPSHOT</dtkit.default.tusar.version>
+        <dtkit.model.version>0.8-SNAPSHOT</dtkit.model.version>
     </properties>
 
     <dependencies>
@@ -42,6 +43,12 @@
             <groupId>org.jvnet.hudson.dtkit</groupId>
             <artifactId>dtkit-metrics-hudson-api</artifactId>
             <version>${dtkit.frmk.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jvnet.hudson.dtkit</groupId>
+            <artifactId>dtkit-tusar-model</artifactId>
+            <version>${dtkit.model.version}</version>
         </dependency>
 
         <dependency>
