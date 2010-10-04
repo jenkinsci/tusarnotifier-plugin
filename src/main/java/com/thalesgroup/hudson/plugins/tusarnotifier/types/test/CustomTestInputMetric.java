@@ -36,8 +36,7 @@ import java.io.File;
 public class CustomTestInputMetric extends InputMetricXSL implements CustomInputMetric {
 
     private File customXSLFile;
-
-    @Override
+    
     public void setCustomXSLFile(File customXSLFile) {
         this.customXSLFile = customXSLFile;
     }
@@ -73,7 +72,7 @@ public class CustomTestInputMetric extends InputMetricXSL implements CustomInput
     }
 
     @Override
-    public String getInputXsdName() {
+    public String[] getInputXsdNameList() {
         return null;
     }
 

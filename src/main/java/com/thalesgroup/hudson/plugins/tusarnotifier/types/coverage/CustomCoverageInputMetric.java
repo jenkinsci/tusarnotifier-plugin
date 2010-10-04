@@ -73,7 +73,7 @@ public class CustomCoverageInputMetric extends InputMetricXSL implements CustomI
     }
 
     @Override
-    public String getInputXsdName() {
+    public String[] getInputXsdNameList() {
         return null;
     }
 

@@ -73,7 +73,7 @@ public class CustomViolationInputMetric extends InputMetricXSL implements Custom
     }
 
     @Override
-    public String getInputXsdName() {
+    public String[] getInputXsdNameList() {
         return null;
     }
 
