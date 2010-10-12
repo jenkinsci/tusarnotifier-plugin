@@ -13,9 +13,9 @@
     <name>TUSAR Notifier</name>
 
     <properties>
-        <dtkit.frmk.version>0.8-SNAPSHOT</dtkit.frmk.version>
-        <dtkit.default.tusar.version>0.9-SNAPSHOT</dtkit.default.tusar.version>
-        <dtkit.model.version>0.8-SNAPSHOT</dtkit.model.version>
+        <dtkit.frmk.version>0.8</dtkit.frmk.version>
+        <dtkit.default.tusar.version>0.9</dtkit.default.tusar.version>
+        <dtkit.model.version>0.8</dtkit.model.version>
     </properties>
 
     <dependencies>
