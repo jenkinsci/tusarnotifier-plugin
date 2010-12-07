@@ -23,13 +23,10 @@
 
 package com.thalesgroup.hudson.plugins.tusarnotifier.util;
 
+import com.google.inject.Inject;
 import hudson.model.BuildListener;
-import hudson.model.TaskListener;
-import org.jvnet.localizer.ResourceBundleHolder;
 
 import java.io.Serializable;
-
-import com.google.inject.Inject;
 
 
 public class TusarNotifierLogger implements Serializable {

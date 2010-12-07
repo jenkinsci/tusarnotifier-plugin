@@ -29,7 +29,7 @@ import hudson.model.BuildListener;
 import java.io.Serializable;
 
 public class TusarNotifierLog implements Serializable {
-   
+
     private BuildListener buildListener;
 
     @Inject

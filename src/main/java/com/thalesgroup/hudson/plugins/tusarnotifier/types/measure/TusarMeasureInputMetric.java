@@ -25,15 +25,13 @@ package com.thalesgroup.hudson.plugins.tusarnotifier.types.measure;
 
 import com.thalesgroup.dtkit.metrics.model.InputMetricOther;
 import com.thalesgroup.dtkit.metrics.model.InputType;
-import com.thalesgroup.dtkit.tusar.model.TusarModel;
 import com.thalesgroup.dtkit.util.converter.ConversionException;
-import com.thalesgroup.dtkit.util.validator.ValidationError;
 import com.thalesgroup.dtkit.util.validator.ValidationException;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.util.Map;
 
 
 public class TusarMeasureInputMetric extends InputMetricOther {
@@ -60,12 +58,14 @@ public class TusarMeasureInputMetric extends InputMetricOther {
      *
      * @param inputFile the input file to convert
      * @param outFile   the output file to convert
+     * @param params    the xsl parameters
      * @throws com.thalesgroup.dtkit.util.converter.ConversionException
      *          an application Exception to throw when there is an error of conversion
      *          The exception is catched by the API client (as Hudson plugin)
      */
     @Override
-    public void convert(File inputFile, File outFile) throws ConversionException {
+    public void convert(File inputFile, File outFile, Map<String, Object> params) throws ConversionException {
+
         //Copy input to output
         try {
             FileUtils.copyFile(inputFile, outFile, false);
@@ -81,9 +81,7 @@ public class TusarMeasureInputMetric extends InputMetricOther {
      */
     @Override
     public boolean validateInputFile(File inputXMLFile) throws ValidationException {
-        List<ValidationError> errors = TusarModel.OUTPUT_TUSAR_1_0.validate(inputXMLFile);
-        this.setInputValidationErrors(errors);
-        return errors.isEmpty();
+        return true;
     }
 
     /*
@@ -93,9 +91,7 @@ public class TusarMeasureInputMetric extends InputMetricOther {
      */
     @Override
     public boolean validateOutputFile(File inputXMLFile) throws ValidationException {
-        List<ValidationError> errors = TusarModel.OUTPUT_TUSAR_1_0.validate(inputXMLFile);
-        this.setOutputValidationErrors(errors);
-        return errors.isEmpty();
+        return true;
     }
 
 }

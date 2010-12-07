@@ -13,9 +13,9 @@
     <name>TUSAR Notifier</name>
 
     <properties>
-        <dtkit.frmk.version>0.10</dtkit.frmk.version>
-        <dtkit.default.tusar.version>0.11</dtkit.default.tusar.version>
-        <dtkit.model.version>0.10</dtkit.model.version>
+        <dtkit.frmk.version>0.11-SNAPSHOT</dtkit.frmk.version>
+        <dtkit.default.tusar.version>0.13-SNAPSHOT</dtkit.default.tusar.version>
+        <dtkit.model.version>0.11-SNAPSHOT</dtkit.model.version>
     </properties>
 
     <dependencies>
@@ -59,6 +59,11 @@
 
     </dependencies>
 
+    <scm>
+        <connection>scm:svn:https://gbois@svn.java.net/svn/hudson~svn/trunk/hudson/plugins/tusarnotifier</connection>
+        <developerConnection>scm:svn:https://svn.java.net/svn/hudson~svn/trunk/hudson/plugins/tusarnotifier</developerConnection>
+    </scm>
+
     <build>
         <plugins>
             <plugin>
@@ -98,6 +103,14 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <goals>deploy</goals>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 </project>
