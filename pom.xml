@@ -8,7 +8,7 @@
     </parent>
 
     <artifactId>tusarnotifier</artifactId>
-    <version>1.5-SNAPSHOT</version>
+    <version>1.5</version>
     <packaging>hpi</packaging>
     <name>TUSAR Notifier</name>
 
@@ -60,9 +60,10 @@
     </dependencies>
 
     <scm>
-        <connection>scm:svn:https://gbois@svn.java.net/svn/hudson~svn/trunk/hudson/plugins/tusarnotifier</connection>
-        <developerConnection>scm:svn:https://svn.java.net/svn/hudson~svn/trunk/hudson/plugins/tusarnotifier</developerConnection>
-    </scm>
+        <connection>scm:svn:https://gbois@svn.java.net/svn/hudson~svn/tags/tusarnotifier-1.5</connection>
+        <developerConnection>scm:svn:https://svn.java.net/svn/hudson~svn/tags/tusarnotifier-1.5</developerConnection>
+      <url>https://hudson.dev.java.net/source/browse/hudson/tags/tusarnotifier-1.5</url>
+  </scm>
 
     <build>
         <plugins>
