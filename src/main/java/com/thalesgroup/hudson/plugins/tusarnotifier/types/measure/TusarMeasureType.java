@@ -55,7 +55,7 @@ public class TusarMeasureType extends MeasureType {
 
         @Override
         public String getId() {
-            throw new UnsupportedOperationException("The descriptor registry with the called getId() method is not used. The descriptor redefines its own getInputMetric() method.");
+	   return this.getClass().getName();
         }
 
         @Override

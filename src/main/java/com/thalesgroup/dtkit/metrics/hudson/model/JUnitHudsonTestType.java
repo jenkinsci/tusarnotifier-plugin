@@ -38,8 +38,7 @@ public class JUnitHudsonTestType extends TestType {
     }
 
     public Object readResolve() {
-        return new JUnitTusarHudsonTestType(this.getPattern(), this.isFaildedIfNotNew(), this.isDeleteOutputFiles());
-    }
+        return new JUnitTusarHudsonTestType(this.getPattern(), this.isFaildedIfNotNew(), this.isDeleteOutputFiles(), this.isStopProcessingIfError());    }
 
 
 }

@@ -38,7 +38,7 @@ public class GnatmetricHudsonMeasureType extends MeasureType {
     }
 
     public Object readResolve() {
-        return new GnatmetricTusarHudsonMeasureType(this.getPattern(), this.isFaildedIfNotNew(), this.isDeleteOutputFiles());
+        return new GnatmetricTusarHudsonMeasureType(this.getPattern(), this.isFaildedIfNotNew(), this.isDeleteOutputFiles(), this.isStopProcessingIfError());
     }
 
 }

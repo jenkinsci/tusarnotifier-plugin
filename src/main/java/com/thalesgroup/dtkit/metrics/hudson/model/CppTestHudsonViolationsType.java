@@ -37,7 +37,7 @@ public class CppTestHudsonViolationsType extends ViolationsType {
     }
 
     public Object readResolve() {
-        return new CppTestTusarHudsonViolationsType(this.getPattern(), this.isFaildedIfNotNew(), this.isDeleteOutputFiles());
+        return new CppTestTusarHudsonViolationsType(this.getPattern(), this.isFaildedIfNotNew(), this.isDeleteOutputFiles(), this.isStopProcessingIfError());
     }
 
 }

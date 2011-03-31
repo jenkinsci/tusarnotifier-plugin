@@ -37,6 +37,6 @@ public class CheckstyleHudsonViolationsType extends ViolationsType {
     }
 
     public Object readResolve() {
-        return new CheckstyleTusarHudsonViolationsType(this.getPattern(), this.isFaildedIfNotNew(), this.isDeleteOutputFiles());
+        return new CheckstyleTusarHudsonViolationsType(this.getPattern(), this.isFaildedIfNotNew(), this.isDeleteOutputFiles(), this.isStopProcessingIfError());
     }
 }

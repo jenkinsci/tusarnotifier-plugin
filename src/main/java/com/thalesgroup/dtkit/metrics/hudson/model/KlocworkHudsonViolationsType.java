@@ -37,7 +37,7 @@ public class KlocworkHudsonViolationsType extends ViolationsType {
     }
 
     public Object readResolve() {
-        return new KlocworkTusarHudsonViolationsType(this.getPattern(), this.isFaildedIfNotNew(), this.isDeleteOutputFiles());
+        return new KlocworkTusarHudsonViolationsType(this.getPattern(), this.isFaildedIfNotNew(), this.isDeleteOutputFiles(), this.isStopProcessingIfError());
     }
 
 }

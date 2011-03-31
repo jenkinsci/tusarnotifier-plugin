@@ -38,7 +38,7 @@ public class CoberturaHudsonCoverageType extends CoverageType {
     }
 
     public Object readResolve() {
-        return new CoberturaTusarHudsonCoverageType(this.getPattern(), this.isFaildedIfNotNew(), this.isDeleteOutputFiles());
+        return new CoberturaTusarHudsonCoverageType(this.getPattern(), this.isFaildedIfNotNew(), this.isDeleteOutputFiles(), this.isStopProcessingIfError());
     }
 
 }

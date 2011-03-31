@@ -40,6 +40,7 @@
 			<tr>
 			    <input type="hidden" name="faildedIfNotNew" value="false" />
 			    <input type="hidden" name="deleteOutputFiles" value="false" />
+			    <input type="hidden" name="stopProcessingIfError" value="false" />
 	        </tr>
          </j:if>
          <j:if test="${not descriptor.isCustomType()}">
@@ -52,6 +53,7 @@
 			<tr>
 			    <input type="hidden" name="faildedIfNotNew" value="false" />
 			    <input type="hidden" name="deleteOutputFiles" value="false" />
+			    <input type="hidden" name="stopProcessingIfError" value="false" />
 	        </tr>
          </j:if>
 		</table>
