@@ -32,13 +32,12 @@
         <version>1.404</version>
     </parent>
 
-    <groupId>com.thalesgroup.jenkins.plugins</groupId>
+    <groupId>com.thalesgroup.jenkins-ci.plugins</groupId>
     <artifactId>tusarnotifier</artifactId>
-    <version>1.6.1.2-SNAPSHOT</version>
+    <version>1.6.2-SNAPSHOT</version>
     <packaging>hpi</packaging>
     <name>Jenkins TUSAR Notifier</name>
     <url>http://wiki.jenkins-ci.org/display/JENKINS/TusarNotifier</url>
-
 
     <properties>
         <dtkit.frmk.version>0.14.1</dtkit.frmk.version>
@@ -90,8 +89,8 @@
     </dependencies>
 
     <scm>
-        <connection>scm:svn:https://gbois@svn.java.net/svn/hudson~svn/trunk/hudson/plugins/tusarnotifier</connection>
-        <developerConnection>scm:svn:https://svn.java.net/svn/hudson~svn/trunk/hudson/plugins/tusarnotifier</developerConnection>
+        <connection>scm:git:git://github.com/jenkinsci/tusarnotifier-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:jenkinsci/tusarnotifier-plugin.git</developerConnection>
     </scm>
 
     <build>
