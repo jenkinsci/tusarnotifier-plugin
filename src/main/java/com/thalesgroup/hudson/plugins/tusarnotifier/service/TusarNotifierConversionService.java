@@ -1,6 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 Thales Corporate Services SAS                             *
- * Author : Gregory Boissinot                                                   *
+ * Copyright (c) 2009 Thales Corporate Services SAS                             *
  *                                                                              *
  * Permission is hereby granted, free of charge, to any person obtaining a copy *
  * of this software and associated documentation files (the "Software"), to deal*
@@ -35,7 +34,9 @@ import com.thalesgroup.hudson.plugins.tusarnotifier.types.CustomType;
 import java.io.File;
 import java.io.Serializable;
 
-
+/**
+ * @author Gregory Boissinot
+ */
 public class TusarNotifierConversionService implements Serializable {
 
     private TusarNotifierLog xUnitLog;

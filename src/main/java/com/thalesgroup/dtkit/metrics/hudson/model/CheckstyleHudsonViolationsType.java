@@ -1,6 +1,5 @@
 /*******************************************************************************
  * Copyright (c) 2009 Thales Corporate Services SAS                             *
- * Author : Gregory Boissinot                                                   *
  *                                                                              *
  * Permission is hereby granted, free of charge, to any person obtaining a copy *
  * of this software and associated documentation files (the "Software"), to deal*
@@ -26,6 +25,9 @@ package com.thalesgroup.dtkit.metrics.hudson.model;
 import com.thalesgroup.dtkit.metrics.hudson.api.descriptor.ViolationsTypeDescriptor;
 import com.thalesgroup.dtkit.metrics.hudson.api.type.ViolationsType;
 
+/**
+ * @author Gregory Boissinot
+ */
 public class CheckstyleHudsonViolationsType extends ViolationsType {
 
     public CheckstyleHudsonViolationsType(String pattern, boolean faildedIfNotNew, boolean deleteOutputFiles) {

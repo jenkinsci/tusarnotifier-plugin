@@ -1,6 +1,5 @@
 /*******************************************************************************
  * Copyright (c) 2010 Thales Corporate Services SAS                             *
- * Author : Gregory Boissinot                                                   *
  *                                                                              *
  * Permission is hereby granted, free of charge, to any person obtaining a copy *
  * of this software and associated documentation files (the "Software"), to deal*
@@ -34,6 +33,9 @@ import java.io.File;
 import java.io.Serializable;
 
 
+/**
+ * @author Gregory Boissinot
+ */
 public class TusarNotifierValidationService implements Serializable {
 
     private TusarNotifierLog tusarNotifierLog;
@@ -109,8 +111,7 @@ public class TusarNotifierValidationService implements Serializable {
                 return false;
             }
 
-        }
-        catch (ValidationException ve) {
+        } catch (ValidationException ve) {
             throw new TusarNotifierException("Validation error on output", ve);
         }
 

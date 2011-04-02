@@ -1,6 +1,5 @@
 /*******************************************************************************
  * Copyright (c) 2010 Thales Corporate Services SAS                             *
- * Author : Gregory Boissinot, Guillaume Tanier                                 *
  *                                                                              *
  * Permission is hereby granted, free of charge, to any person obtaining a copy *
  * of this software and associated documentation files (the "Software"), to deal*
@@ -38,6 +37,9 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * @author Gregory Boissinot
+ */
 public class TusarNotifierTransformer implements FilePath.FileCallable<Boolean>, Serializable {
 
     private TusarNotifierReportProcessingService tusarNotifierReportProcessingService;
@@ -108,8 +110,7 @@ public class TusarNotifierTransformer implements FilePath.FileCallable<Boolean>,
                 }
             }
 
-        }
-        catch (TusarNotifierException xe) {
+        } catch (TusarNotifierException xe) {
             throw new IOException2("There are some problems during the conversion into standard output: " + xe.getMessage(), xe);
         }
 

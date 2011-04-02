@@ -1,6 +1,5 @@
 /*******************************************************************************
  * Copyright (c) 2010 Thales Corporate Services SAS                             *
- * Author : Gregory Boissinot                                                   *
  *                                                                              *
  * Permission is hereby granted, free of charge, to any person obtaining a copy *
  * of this software and associated documentation files (the "Software"), to deal*
@@ -37,6 +36,9 @@ import java.util.Arrays;
 import java.util.List;
 
 
+/**
+ * @author Gregory Boissinot
+ */
 public class TusarNotifierReportProcessingService implements Serializable {
 
     private TusarNotifierLog xUnitLog;

@@ -1,6 +1,6 @@
 <!--
 /*******************************************************************************
-* Copyright (c) 2011 Thales Corporate Services SAS                             *
+* Copyright (c) 2009-2011 Thales Corporate Services SAS                        *
 * Author : Gregory Boissinot                                                   *
 *                                                                              *
 * Permission is hereby granted, free of charge, to any person obtaining a copy *
@@ -23,7 +23,8 @@
 *******************************************************************************/
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -43,9 +44,40 @@
         <dtkit.frmk.version>0.14.1</dtkit.frmk.version>
         <dtkit.default.tusar.version>0.19</dtkit.default.tusar.version>
         <dtkit.tusar.model.version>0.14</dtkit.tusar.model.version>
-	<xerces.impl>2.6.2</xerces.impl>
-	<junit.version>4.8.2</junit.version>
+        <xerces.impl>2.6.2</xerces.impl>
+        <junit.version>4.8.2</junit.version>
     </properties>
+
+    <licenses>
+        <license>
+            <name>MIT license</name>
+            <comments>All source code is under the MIT license.</comments>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>gbois</id>
+            <name>Gregory Boissinot</name>
+            <email>gregory.boissinot@gmail.com</email>
+            <timezone>+1</timezone>
+            <roles>
+                <role>Project owner</role>
+                <role>Project developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <contributors>
+        <contributor>
+            <name>Guillaume Tanier</name>
+            <organization>Thales</organization>
+            <roles>
+                <role>Project developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </contributor>
+    </contributors>
 
     <dependencies>
 

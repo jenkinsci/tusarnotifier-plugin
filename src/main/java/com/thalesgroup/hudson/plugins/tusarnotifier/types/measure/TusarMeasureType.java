@@ -1,6 +1,5 @@
 /*******************************************************************************
  * Copyright (c) 2010 Thales Corporate Services SAS                             *
- * Author : Gregory Boissinot                                                   *
  *                                                                              *
  * Permission is hereby granted, free of charge, to any person obtaining a copy *
  * of this software and associated documentation files (the "Software"), to deal*
@@ -55,7 +54,7 @@ public class TusarMeasureType extends MeasureType {
 
         @Override
         public String getId() {
-	   return this.getClass().getName();
+            return this.getClass().getName();
         }
 
         @Override

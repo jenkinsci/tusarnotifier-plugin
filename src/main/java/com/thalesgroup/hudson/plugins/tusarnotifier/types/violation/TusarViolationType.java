@@ -55,7 +55,7 @@ public class TusarViolationType extends ViolationsType {
 
         @Override
         public String getId() {
-	    return this.getClass().getName();
+            return this.getClass().getName();
         }
 
         @Override

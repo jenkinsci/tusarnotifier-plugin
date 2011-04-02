@@ -1,6 +1,5 @@
 /*******************************************************************************
  * Copyright (c) 2010 Thales Corporate Services SAS                             *
- * Author : Gregory Boissinot                                                   *
  *                                                                              *
  * Permission is hereby granted, free of charge, to any person obtaining a copy *
  * of this software and associated documentation files (the "Software"), to deal*
@@ -24,7 +23,7 @@
 package com.thalesgroup.hudson.plugins.tusarnotifier.types;
 
 /**
- * Marked interface
+ * @author Gregory Boissinot
  */
 public interface CustomType {
 

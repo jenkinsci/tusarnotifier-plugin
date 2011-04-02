@@ -1,6 +1,5 @@
 /*******************************************************************************
  * Copyright (c) 2009 Thales Corporate Services SAS                             *
- * Author : Gregory Boissinot                                                   *
  *                                                                              *
  * Permission is hereby granted, free of charge, to any person obtaining a copy *
  * of this software and associated documentation files (the "Software"), to deal*
@@ -27,6 +26,9 @@ import com.thalesgroup.dtkit.metrics.hudson.api.descriptor.TestTypeDescriptor;
 import com.thalesgroup.dtkit.metrics.hudson.api.type.TestType;
 
 
+/**
+ * @author Gregory Boissinot
+ */
 public class JUnitHudsonTestType extends TestType {
 
     public JUnitHudsonTestType(String pattern, boolean faildedIfNotNew, boolean deleteOutputFiles) {
@@ -38,7 +40,8 @@ public class JUnitHudsonTestType extends TestType {
     }
 
     public Object readResolve() {
-        return new JUnitTusarHudsonTestType(this.getPattern(), this.isFaildedIfNotNew(), this.isDeleteOutputFiles(), this.isStopProcessingIfError());    }
+        return new JUnitTusarHudsonTestType(this.getPattern(), this.isFaildedIfNotNew(), this.isDeleteOutputFiles(), this.isStopProcessingIfError());
+    }
 
 
 }

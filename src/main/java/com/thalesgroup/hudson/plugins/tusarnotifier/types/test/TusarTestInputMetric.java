@@ -1,6 +1,5 @@
 /*******************************************************************************
  * Copyright (c) 2010 Thales Corporate Services SAS                             *
- * Author : Gregory Boissinot                                                   *
  *                                                                              *
  * Permission is hereby granted, free of charge, to any person obtaining a copy *
  * of this software and associated documentation files (the "Software"), to deal*
@@ -25,15 +24,20 @@ package com.thalesgroup.hudson.plugins.tusarnotifier.types.test;
 
 import com.thalesgroup.dtkit.metrics.model.InputMetricOther;
 import com.thalesgroup.dtkit.metrics.model.InputType;
+import com.thalesgroup.dtkit.tusar.model.TusarModel;
 import com.thalesgroup.dtkit.util.converter.ConversionException;
+import com.thalesgroup.dtkit.util.validator.ValidationError;
 import com.thalesgroup.dtkit.util.validator.ValidationException;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
-
+/**
+ * @author Gregory Boissinot
+ */
 public class TusarTestInputMetric extends InputMetricOther {
 
     @Override
@@ -78,20 +82,22 @@ public class TusarTestInputMetric extends InputMetricOther {
      *
      * @return true if the input file is valid, false otherwise
      */
-
     @Override
     public boolean validateInputFile(File inputXMLFile) throws ValidationException {
-        return true;
+        List<ValidationError> errors = TusarModel.OUTPUT_TUSAR_6_0.validate(inputXMLFile);
+        this.setInputValidationErrors(errors);
+        return errors.isEmpty();
+
     }
 
     /*
-    *  Gives the validation process for the output file
-    *
-    * @return true if the input file is valid, false otherwise
-    */
+     *  Gives the validation process for the output file
+     *
+     * @return true if the input file is valid, false otherwise
+     */
     @Override
     public boolean validateOutputFile(File inputXMLFile) throws ValidationException {
-        return true;
+        return validateInputFile(inputXMLFile);
     }
 
 }

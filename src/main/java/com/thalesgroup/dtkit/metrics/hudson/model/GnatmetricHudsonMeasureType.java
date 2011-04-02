@@ -1,6 +1,5 @@
 /*******************************************************************************
  * Copyright (c) 2009 Thales Corporate Services SAS                             *
- * Author : Gregory Boissinot                                                   *
  *                                                                              *
  * Permission is hereby granted, free of charge, to any person obtaining a copy *
  * of this software and associated documentation files (the "Software"), to deal*
@@ -27,6 +26,9 @@ import com.thalesgroup.dtkit.metrics.hudson.api.descriptor.MeasureTypeDescriptor
 import com.thalesgroup.dtkit.metrics.hudson.api.type.MeasureType;
 
 
+/**
+ * @author Gregory Boissinot
+ */
 public class GnatmetricHudsonMeasureType extends MeasureType {
 
     public GnatmetricHudsonMeasureType(String pattern, boolean faildedIfNotNew, boolean deleteOutputFiles) {
