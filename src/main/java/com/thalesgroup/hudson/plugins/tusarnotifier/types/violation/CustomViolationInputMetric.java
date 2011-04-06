@@ -79,6 +79,6 @@ public class CustomViolationInputMetric extends InputMetricXSL implements Custom
 
     @Override
     public OutputMetric getOutputFormatType() {
-        return TusarModel.OUTPUT_TUSAR_6_0;
+        return TusarModel.LATEST;
     }
 }

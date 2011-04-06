@@ -80,6 +80,6 @@ public class CustomMeasureInputMetric extends InputMetricXSL implements CustomIn
 
     @Override
     public OutputMetric getOutputFormatType() {
-        return TusarModel.OUTPUT_TUSAR_6_0;
+        return TusarModel.LATEST;
     }
 }

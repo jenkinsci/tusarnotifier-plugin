@@ -80,6 +80,6 @@ public class CustomCoverageInputMetric extends InputMetricXSL implements CustomI
 
     @Override
     public OutputMetric getOutputFormatType() {
-        return TusarModel.OUTPUT_TUSAR_6_0;
+        return TusarModel.LATEST;
     }
 }
