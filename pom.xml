@@ -23,13 +23,14 @@
 *******************************************************************************/
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>1.404</version>
+        <version>1.410</version>
     </parent>
 
     <groupId>com.thalesgroup.jenkins-ci.plugins</groupId>
@@ -40,6 +41,9 @@
     <url>http://wiki.jenkins-ci.org/display/JENKINS/TusarNotifier</url>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.6</maven.compiler.source>
+        <maven.compiler.target>1.6</maven.compiler.target>
         <dtkit.frmk.version>0.14.1</dtkit.frmk.version>
         <dtkit.default.tusar.version>0.19</dtkit.default.tusar.version>
         <dtkit.tusar.model.version>0.15</dtkit.tusar.model.version>
@@ -90,6 +94,12 @@
             <groupId>com.thalesgroup.dtkit</groupId>
             <artifactId>dtkit-metrics-model</artifactId>
             <version>${dtkit.frmk.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>net.sourceforge.saxon</groupId>
+                    <artifactId>saxon</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -138,6 +148,15 @@
                         </goals>
                         <configuration>
                             <artifactItems>
+                                <artifactItem>
+                                    <groupId>net.sourceforge.saxon</groupId>
+                                    <artifactId>saxon</artifactId>
+                                    <version>9.1.0.8</version>
+                                    <type>jar</type>
+                                    <overWrite>false</overWrite>
+                                    <outputDirectory>${project.build.directory}/tusarnotifier/WEB-INF/lib
+                                    </outputDirectory>
+                                </artifactItem>
                                 <artifactItem>
                                     <groupId>net.sourceforge.saxon</groupId>
                                     <artifactId>saxon</artifactId>
