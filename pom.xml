@@ -34,7 +34,7 @@
 
     <groupId>com.thalesgroup.jenkins-ci.plugins</groupId>
     <artifactId>tusarnotifier</artifactId>
-    <version>1.9-SNAPSHOT</version>
+    <version>1.9</version>
     <packaging>hpi</packaging>
     <name>Jenkins TUSAR Notifier</name>
     <url>http://wiki.jenkins-ci.org/display/JENKINS/TusarNotifier</url>
