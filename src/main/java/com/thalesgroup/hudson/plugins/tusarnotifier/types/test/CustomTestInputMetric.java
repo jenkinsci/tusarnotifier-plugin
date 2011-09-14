@@ -26,7 +26,6 @@ package com.thalesgroup.hudson.plugins.tusarnotifier.types.test;
 import com.thalesgroup.dtkit.metrics.model.InputMetricXSL;
 import com.thalesgroup.dtkit.metrics.model.InputType;
 import com.thalesgroup.dtkit.metrics.model.OutputMetric;
-import com.thalesgroup.dtkit.tusar.model.TusarModel;
 import com.thalesgroup.hudson.plugins.tusarnotifier.types.CustomInputMetric;
 
 import java.io.File;
@@ -80,6 +79,6 @@ public class CustomTestInputMetric extends InputMetricXSL implements CustomInput
 
     @Override
     public OutputMetric getOutputFormatType() {
-        return TusarModel.LATEST;
+        return null;
     }
 }

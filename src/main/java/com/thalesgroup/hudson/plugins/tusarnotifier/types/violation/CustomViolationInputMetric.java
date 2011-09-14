@@ -25,7 +25,6 @@ package com.thalesgroup.hudson.plugins.tusarnotifier.types.violation;
 import com.thalesgroup.dtkit.metrics.model.InputMetricXSL;
 import com.thalesgroup.dtkit.metrics.model.InputType;
 import com.thalesgroup.dtkit.metrics.model.OutputMetric;
-import com.thalesgroup.dtkit.tusar.model.TusarModel;
 import com.thalesgroup.hudson.plugins.tusarnotifier.types.CustomInputMetric;
 
 import java.io.File;
@@ -79,6 +78,6 @@ public class CustomViolationInputMetric extends InputMetricXSL implements Custom
 
     @Override
     public OutputMetric getOutputFormatType() {
-        return TusarModel.LATEST;
+        return null;
     }
 }
